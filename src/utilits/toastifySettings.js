@@ -7,5 +7,5 @@ export const successSettings = {
   draggable: true,
   progress: undefined,
   theme: 'colored',
-  style: { backgroundColor: 'orange' },
+  style: { backgroundColor: 'orange', borderRadius: '10px' },
 };

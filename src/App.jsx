@@ -4,19 +4,13 @@ import { Form } from './components/Form/Form';
 import { ContactList } from './components/ContactList/ContactList';
 import { Container } from './components/Container.styled';
 import { Input, Section } from './components/Form/FormElements.styled';
-// import { useDispatch } from 'react-redux';
-
-// import { getContacts, getFilter } from 'redux/selector';
-// import { setFilter } from 'redux/reducer';
 
 import { useGetContactsQuery } from 'redux/contactSlice';
 import { useState } from 'react';
 
 export function App() {
-  // const contacts = useSelector(getContacts);
   const { data } = useGetContactsQuery();
-  // const filter = useSelector(getFilter);
-  // console.log(data);
+
   const [filter, setFilter] = useState('');
 
   const onChangeImputFilter = event => {
@@ -40,13 +34,20 @@ export function App() {
           <p>No contacts</p>
         ) : (
           <Section>
-            <p>Find conacts by name</p>
-            <Input
-              type="text"
-              placeholder="Search contact"
-              value={filter}
-              onChange={onChangeImputFilter}
-            />
+            {/* console.log(data); */}
+            {data?.length > 0 ? (
+              <div>
+                <p>Find conacts by name</p>
+                <Input
+                  type="text"
+                  placeholder="Search contact"
+                  value={filter}
+                  onChange={onChangeImputFilter}
+                />
+              </div>
+            ) : (
+              <p>No contacts</p>
+            )}
             <ContactList contacts={filteredContacts} />
           </Section>
         )}

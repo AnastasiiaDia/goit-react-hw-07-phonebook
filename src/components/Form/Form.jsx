@@ -27,7 +27,7 @@ export function Form() {
 
     addContact(addedContact);
     toast.success(
-      `${addedContact.name} is now in your contacts`,
+      `${addedContact.name} is now in your contacts 🤍`,
       successSettings
     );
   };

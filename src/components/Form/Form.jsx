@@ -1,14 +1,10 @@
 import { toast } from 'react-toastify';
 import { Button, FormEl, Input } from './FormElements.styled';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { getContacts } from 'redux/selector';
-// import { addContact } from 'redux/reducer';
+
 import { useAddContactMutation, useGetContactsQuery } from 'redux/contactSlice';
 import { successSettings } from 'utilits/toastifySettings';
 
 export function Form() {
-  // const dispatch = useDispatch();
-  // const contacts = useSelector(getContacts);
   const { data } = useGetContactsQuery();
   const [addContact] = useAddContactMutation();
 

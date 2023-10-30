@@ -1,19 +1,19 @@
 import { Button } from 'components/Form/FormElements.styled';
 import { Li } from './Contact.styled';
-import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/reducer';
+import { useDeleteContactMutation } from 'redux/contactSlice';
+
+// import { useDeleteContactMutation } from 'redux/contactSlice';
 
 const Contact = ({ name, id, number }) => {
-  const distatch = useDispatch();
-  const onDeleteContact = id => {
-    distatch(deleteContact(id));
-  };
+  const [onDelete, { isLoading }] = useDeleteContactMutation();
+  // console.log(useDeteleteContactMutation(id));
   return (
     <Li>
       <span>{name}</span>
       <span>{number}</span>
-      <Button type="button" onClick={() => onDeleteContact(id)}>
-        Delete
+
+      <Button disabled={isLoading} type="button" onClick={() => onDelete(id)}>
+        {isLoading ? 'Deliting...' : 'Delete'}
       </Button>
     </Li>
   );

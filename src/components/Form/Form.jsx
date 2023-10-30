@@ -1,11 +1,16 @@
+import { toast } from 'react-toastify';
 import { Button, FormEl, Input } from './FormElements.styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selector';
-import { addContact } from 'redux/reducer';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { getContacts } from 'redux/selector';
+// import { addContact } from 'redux/reducer';
+import { useAddContactMutation, useGetContactsQuery } from 'redux/contactSlice';
+import { successSettings } from 'utilits/toastifySettings';
 
 export function Form() {
-  const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  // const dispatch = useDispatch();
+  // const contacts = useSelector(getContacts);
+  const { data } = useGetContactsQuery();
+  const [addContact] = useAddContactMutation();
 
   const onFormSubmit = event => {
     event.preventDefault();
@@ -16,10 +21,15 @@ export function Form() {
 
     event.target.reset();
 
-    if (contacts.some(({ name }) => addedContact.name === name)) {
+    if (data.some(({ name }) => addedContact.name === name)) {
       return alert(`${addedContact.name} is alrady in your contacts`);
     }
-    dispatch(addContact(addedContact));
+
+    addContact(addedContact);
+    toast.success(
+      `${addedContact.name} is now in your contacts`,
+      successSettings
+    );
   };
 
   return (
